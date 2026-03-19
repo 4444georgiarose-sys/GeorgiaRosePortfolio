@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Georgia Rose Photography</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <header>
+    <div class="nav-mobile">
+      <div class="logo">Georgia Rose Photography</div>
+      <div class="hamburger" id="hamburger">
+        <div></div><div></div><div></div>
+      </div>
+    </div>
+    <nav class="nav-overlay" id="navOverlay">
+      <ul>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Photography Across Multiple Niches</h1>
+    <p>Portrait, Street, Fashion & Lifestyle</p>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section class="portfolio" id="work">
+    <div class="grid">
+      <div class="project">
+        <img src="images/photo1.jpg" alt="Portrait" loading="lazy">
+        <span class="overlay-text">Portrait</span>
+      </div>
+      <div class="project">
+        <img src="images/photo2.jpg" alt="Street" loading="lazy">
+        <span class="overlay-text">Street</span>
+      </div>
+      <div class="project">
+        <img src="images/photo3.jpg" alt="Fashion" loading="lazy">
+        <span class="overlay-text">Fashion</span>
+      </div>
+      <div class="project">
+        <img src="images/photo4.jpg" alt="Lifestyle" loading="lazy">
+        <span class="overlay-text">Lifestyle</span>
+      </div>
+      <!-- Add more portfolio items as needed -->
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <h2>About Me</h2>
+    <p>Hello! I’m Georgia Rose, a photographer capturing stories across multiple niches. I love exploring moments that convey emotion, style, and creativity.</p>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <h2>Contact</h2>
+    <form id="contactForm">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <textarea name="message" placeholder="Your Message" rows="6" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Georgia Rose Photography</p>
+  </footer>
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox" class="lightbox">
+    <span class="close">&times;</span>
+    <img class="lightbox-img" src="" alt="Portfolio Image">
+    <div class="lightbox-controls">
+      <span class="prev">&#10094;</span>
+      <span class="next">&#10095;</span>
+    </div>
+  </div>
+
+  <!-- JS -->
+  <script src="script.js"></script>
+</body>
+</html>
