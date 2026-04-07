@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project 5 — Georgia Rose Photography</title>
+  <meta name="description" content="Photography by Georgia Rose.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=DM+Sans:opsz,wght@9..40,200;9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header id="header">
+    <a class="logo" href="index.html">Georgia Rose Photography</a>
+    <nav class="nav-desktop">
+      <a href="index.html">Work</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
+  <div class="nav-mobile" id="navMobile" aria-hidden="true">
+    <nav>
+      <a href="index.html">Work</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+
+  <!-- Back arrow -->
+  <a href="index.html" class="project-back">
+    <span class="project-back__arrow"></span>
+   <span class="project-back__label">Back to portfolio</span>
+  </a>
+
+  <!-- Project grid — add/remove columns and images as needed -->
+  <h2 class="project-title">Music</h2>
+  <section class="portfolio">
+    <div class="grid-col">
+      <div class="item"><img src="images/projects/project5/photo1.jpg" alt="" loading="eager"></div>
+      <div class="item"><img src="images/projects/project5/photo2.jpg" alt="" loading="lazy"></div>
+      <div class="item"><img src="images/projects/project5/photo3.jpg" alt="" loading="lazy"></div>
+      <div class="item"><img src="images/projects/project5/photo4.jpg" alt="" loading="lazy"></div>
+    </div>
+    <div class="grid-col">
+      <div class="item"><img src="images/projects/project5/photo5.jpg" alt="" loading="eager"></div>
+      <div class="item"><img src="images/projects/project5/photo6.jpg" alt="" loading="lazy"></div>
+      <div class="item"><img src="images/projects/project5/photo7.jpg" alt="" loading="lazy"></div>
+      <div class="item"><img src="images/projects/project5/photo8.jpg" alt="" loading="lazy"></div>
+    </div>
+    <div class="grid-col">
+      <div class="item"><img src="images/projects/project5/photo9.jpg" alt="" loading="eager"></div>
+      <div class="item"><img src="images/projects/project5/photo10.jpg" alt="" loading="lazy"></div>
+      <div class="item"><img src="images/projects/project5/photo11.jpg" alt="" loading="lazy"></div>
+      <div class="item"><img src="images/projects/project5/photo12.jpg" alt="" loading="lazy"></div>
+    </div>
+  </section>
+
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox__close" id="lbClose"></button>
+    <button class="lightbox__prev" id="lbPrev"></button>
+    <img class="lightbox__img" id="lbImg" src="" alt="">
+    <button class="lightbox__next" id="lbNext"></button>
+  </div>
+
+  <footer>
+    <span>&copy; <span id="year"></span> Georgia Rose Photography</span>
+    <div class="footer-links">
+      <a href="mailto:youremail@example.com">youremail@example.com</a>
+      <a href="https://instagram.com/yourusername" target="_blank" rel="noopener">Instagram</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
