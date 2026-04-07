@@ -1,367 +1,686 @@
-/* --------------------------
-   GLOBAL STYLES
---------------------------- */
-* {
+/* =====================================================
+   RESET
+   ===================================================== */
+*, *::before, *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* =====================================================
+   VARIABLES
+   ===================================================== */
+:root {
+  --bg:       #e7e2e0;
+  --ink:      #000;
+  --muted:    #666;
+  --gap:      25px;
+  --pad:      25px;
+  --header-h: 133px;
+}
+
+/* =====================================================
+   BASE
+   ===================================================== */
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  font-family: 'Montserrat', sans-serif;
-  color: #111;
-  background-color: #fff;
-  line-height: 1.6;
-  overflow-x: hidden;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'DM Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
 }
 
 a {
-  text-decoration: none;
   color: inherit;
+  text-decoration: none;
 }
 
 img {
-  max-width: 100%;
+  display: block;
+  width: 100%;
+}
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+#header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: var(--header-h);
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 100px;
+}
+
+.logo {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: none;
+  white-space: nowrap;
+  font-size: clamp(0.9rem, 1.6vw, 1.3rem);
+}
+
+.nav-desktop {
+  display: flex;
+  gap: 36px;
+}
+
+.nav-desktop a {
+  font-size: 1rem;
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  transition: color 0.2s;
+}
+
+.nav-desktop a:hover {
+  color: var(--muted);
+}
+
+.nav-desktop .nav-active {
+  text-decoration: underline;
+  text-decoration-thickness: 0.5px;
+  text-underline-offset: 8px;
+}
+
+.nav-mobile .nav-active {
+  text-decoration: underline;
+  text-decoration-thickness: 0.5px;
+  text-underline-offset: 10px;
+}
+
+/* =====================================================
+   HAMBURGER
+   ===================================================== */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  width: 28px;
+}
+
+.hamburger span {
+  display: block;
+  height: 1px;
+  background: var(--ink);
+  transition: transform 0.25s, opacity 0.25s;
+}
+
+.hamburger.is-open span:first-child {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.hamburger.is-open span:last-child {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+/* =====================================================
+   MOBILE NAV
+   ===================================================== */
+.nav-mobile {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  background: var(--bg);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+}
+
+.nav-mobile.is-open {
+  display: flex;
+}
+
+.nav-mobile nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.nav-mobile a {
+  font-size: 1.1rem;
+  font-weight: 200;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* =====================================================
+   PROJECT PAGE — back arrow
+   ===================================================== */
+.project-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 24px 28px;
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+  opacity: 0.5;
+  transition: opacity 0.2s;
+  text-decoration: none;
+}
+
+.project-back:hover {
+  opacity: 1;
+}
+
+.project-back__arrow {
+  display: block;
+  width: 20px;
+  height: 20px;
+  position: relative;
+}
+
+.project-back__arrow::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 30%;
+  width: 10px;
+  height: 10px;
+  border-top: 0.75px solid currentColor;
+  border-left: 0.75px solid currentColor;
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.project-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.2rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-align: center;
+  color: var(--ink);
+  padding: 0 28px 28px 28px;
+}
+
+/* =====================================================
+   PORTFOLIO GRID
+   Three explicit flex columns — images stack directly
+   under each other with no row-alignment gaps.
+   ===================================================== */
+.portfolio {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: var(--gap);
+  padding: 0 var(--pad);
+}
+
+.grid-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* All items */
+.item {
+  width: 100%;
+  overflow: hidden;
+  opacity: 1;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.item.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.item img {
+  width: 100%;
+  height: auto;
   display: block;
 }
 
-/* --------------------------
-   HEADER & NAVIGATION
---------------------------- */
-header {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1000;
+/* Top 4 per column — 4:5 crop */
+.item--fixed {
+  aspect-ratio: 4 / 5;
 }
 
-.nav-mobile {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 30px 50px;
-  background: #fff;
-}
-
-.nav-mobile .logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 22px;
-  font-weight: 700;
-}
-
-.hamburger {
-  width: 25px;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 18px;
-}
-
-.hamburger div {
-  height: 3px;
-  background: #111;
-  border-radius: 2px;
-}
-
-/* Nav overlay */
-.nav-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
+.item--fixed img {
   height: 100%;
-  width: 100%;
-  background: rgba(255,255,255,0.95);
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  object-fit: cover;
+  object-position: center;
 }
 
-.nav-overlay ul {
-  list-style: none;
-  text-align: center;
-}
-
-.nav-overlay ul li {
-  margin: 20px 0;
-}
-
-.nav-overlay ul li a {
-  font-size: 28px;
-  font-weight: 500;
-}
-
-/* --------------------------
-   HERO SECTION
---------------------------- */
-.hero {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 0 50px;
-}
-
-.hero h1, .hero p {
-  opacity: 0;
-  transform: translateY(20px);
-  animation-fill-mode: forwards;
-  will-change: opacity, transform;
-}
-
-.hero h1.animate {
-  animation: fadeUp 1s ease-out 0.3s forwards;
-}
-
-.hero p.animate {
-  animation: fadeUp 1s ease-out 0.6s forwards;
-}
-
-@keyframes fadeUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* --------------------------
-   PORTFOLIO GRID
---------------------------- */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-  padding: 150px 50px 100px 50px;
-}
-
-.project {
-  position: relative;
-  cursor: pointer;
-  overflow: hidden;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-  will-change: opacity, transform;
-}
-
-.project.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.project img {
-  transition: transform 0.5s ease, box-shadow 0.5s ease;
-}
-
-.project img:hover {
-  transform: scale(1.06) rotate(0.05deg);
-  box-shadow: 0 25px 50px rgba(0,0,0,0.2);
-}
-
-.overlay-text {
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-  color: #fff;
-  font-family: 'Playfair Display', serif;
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.4s ease, transform 0.4s ease;
-  background: rgba(0,0,0,0.4);
-  padding: 4px 8px;
-  border-radius: 2px;
-}
-
-.project:hover .overlay-text,
-.overlay-text.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* --------------------------
-   ABOUT & CONTACT
---------------------------- */
-.about, .contact {
-  padding: 150px 50px;
-  text-align: center;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-  will-change: opacity, transform;
-}
-
-.about.visible, .contact.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.about h2, .about p,
-.contact h2, .contact form {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.about.visible h2, .about.visible p,
-.contact.visible h2, .contact.visible form {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.about.visible p,
-.contact.visible form {
-  transition-delay: 0.2s;
-}
-
-.contact form {
-  display: flex;
-  flex-direction: column;
-  max-width: 500px;
-  margin: 0 auto;
-}
-
-.contact input,
-.contact textarea {
-  padding: 12px;
-  margin-bottom: 20px;
-  border: 1px solid #ccc;
-  font-size: 16px;
-  border-radius: 4px;
-  resize: none;
-}
-
-.contact button {
-  padding: 14px;
-  border: none;
-  background: #111;
-  color: #fff;
-  font-size: 16px;
-  font-weight: 500;
-  cursor: pointer;
-  border-radius: 4px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-}
-
-.contact button:hover {
-  background: #333;
-  transform: scale(1.03);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-}
-
-/* --------------------------
-   FOOTER
---------------------------- */
-footer {
-  padding: 80px 50px;
-  text-align: center;
-  background: #f5f5f5;
-  font-size: 14px;
-}
-
-/* --------------------------
+/* =====================================================
    LIGHTBOX
---------------------------- */
+   ===================================================== */
 .lightbox {
   display: none;
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.9);
-  justify-content: center;
+  inset: 0;
+  z-index: 200;
+  background: rgba(255, 255, 255, 0.92);
   align-items: center;
-  z-index: 2000;
-  opacity: 0;
-  transition: opacity 0.4s ease;
+  justify-content: center;
 }
 
-.lightbox.show {
+.lightbox.is-open {
+  display: flex;
+}
+
+.lightbox__img {
+  max-width: 88vw;
+  max-height: 88vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.lightbox__close,
+.lightbox__prev,
+.lightbox__next {
+  position: absolute;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 16px;
+  opacity: 0.35;
+  transition: opacity 0.2s;
+}
+
+.lightbox__close:hover,
+.lightbox__prev:hover,
+.lightbox__next:hover {
+  opacity: 0.85;
+}
+
+.lightbox__close {
+  top: 24px;
+  right: 48px;
+  width: 40px;
+  height: 40px;
+}
+
+/* X drawn with two CSS lines via pseudo-elements */
+.lightbox__close::before,
+.lightbox__close::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 0.75px;
+  background: #000;
+}
+
+.lightbox__close::before { transform: translate(-50%, -50%) rotate(45deg); }
+.lightbox__close::after  { transform: translate(-50%, -50%) rotate(-45deg); }
+
+/* Prev/next arrows drawn with a thin border corner */
+.lightbox__prev {
+  left: 48px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+}
+
+.lightbox__next {
+  right: 48px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+}
+
+.lightbox__prev::before,
+.lightbox__next::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  border-top: 0.75px solid #000;
+  border-right: 0.75px solid #000;
+}
+
+.lightbox__prev::before {
+  left: 55%;
+  transform: translate(-50%, -50%) rotate(-135deg);
+}
+
+.lightbox__next::before {
+  left: 45%;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+/* =====================================================
+   ABOUT PAGE
+   ===================================================== */
+.page-content {
+  padding: 80px 120px 120px 120px;
+}
+
+.page-content__inner {
+  max-width: 560px;
+}
+
+.page-content h1 {
+  font-size: 27.3px;
+  font-weight: 400;
+  letter-spacing: 4.37px;
+  text-transform: none;
+  color: var(--ink);
+  margin-bottom: 24px;
+}
+
+.page-content p {
+  font-size: 15.83px;
+  font-weight: 300;
+  line-height: 28.49px;
+  margin-bottom: 16px;
+}
+
+/* =====================================================
+   CONTACT PAGE — two column layout
+   Left col: heading + email, fills left half
+   Right col: form, starts at centre, narrower
+   ===================================================== */
+.contact-layout {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 80px 120px 120px 120px;
+  gap: 0;
+}
+
+.contact-left {
+  flex: 0 0 50%;
+}
+
+.contact-left h1 {
+  font-size: 27.3px;
+  font-weight: 400;
+  letter-spacing: 4.37px;
+  color: var(--ink);
+  margin-bottom: 24px;
+}
+
+.contact-left p {
+  font-size: 15.83px;
+  font-weight: 300;
+  line-height: 28.49px;
+  margin-bottom: 8px;
+}
+
+.contact-right {
+  flex: 1;
+  min-width: 0;
+}
+
+@media (max-width: 900px) {
+  .page-content {
+    padding: 60px 60px 80px 60px;
+  }
+  .contact-layout {
+    padding: 60px 60px 80px 60px;
+  }
+  .contact-right {
+    flex: 1;
+  }
+}
+
+@media (max-width: 680px) {
+  .page-content {
+    padding: 40px 24px 60px 24px;
+  }
+  .contact-layout {
+    flex-direction: column;
+    padding: 40px 24px 60px 24px;
+    gap: 40px;
+  }
+  .contact-left {
+    flex: none;
+    width: 100%;
+  }
+  .contact-right {
+    flex: none;
+    width: 100%;
+  }
+}
+
+/* =====================================================
+   CONTACT FORM — polished mailto experience
+   ===================================================== */
+.cf-form {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.cf-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cf-field label {
+  font-size: 0.68rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.cf-field input,
+.cf-field textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(0,0,0,0.15);
+  padding: 10px 0;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: var(--ink);
+  outline: none;
+  -webkit-appearance: none;
+  border-radius: 0;
+  transition: border-color 0.25s;
+}
+
+.cf-field input:focus,
+.cf-field textarea:focus {
+  border-bottom-color: var(--ink);
+}
+
+.cf-field input::placeholder,
+.cf-field textarea::placeholder {
+  color: #bbb;
+}
+
+.cf-field textarea {
+  resize: none;
+  line-height: 1.7;
+}
+
+
+/* Submit button */
+.cf-submit {
+  align-self: flex-start;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 0;
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--ink);
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+  cursor: pointer;
+  transition: gap 0.25s, opacity 0.2s;
+}
+
+.cf-submit:hover {
+  gap: 18px;
+}
+
+.cf-submit__arrow {
+  font-size: 1rem;
+  transition: transform 0.25s;
+}
+
+.cf-submit:hover .cf-submit__arrow {
+  transform: translateX(4px);
+}
+
+/* Confirmation screen */
+.cf-confirm {
+  display: none;
+  position: absolute;
+  inset: 0;
+  align-items: flex-start;
+  justify-content: flex-start;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.cf-confirm.is-visible {
   display: flex;
   opacity: 1;
 }
 
-.lightbox-img {
-  max-width: 90%;
-  max-height: 80%;
+.contact-right {
+  position: relative;
 }
 
-.lightbox .close {
-  position: absolute;
-  top: 30px;
-  right: 40px;
-  font-size: 36px;
-  color: #fff;
-  cursor: pointer;
+.cf-confirm__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-.lightbox-controls span {
-  font-size: 48px;
-  color: #fff;
-  cursor: pointer;
-  margin: 0 20px;
-  user-select: none;
+.cf-confirm__check {
+  font-size: 1.4rem;
+  margin-bottom: 4px;
 }
 
-@media (max-width:768px) {
-  .nav-mobile {
-    padding: 20px 30px;
+.cf-confirm__title {
+  font-size: 27.3px;
+  font-weight: 400;
+  letter-spacing: 4.37px;
+  color: var(--ink);
+  margin: 0 0 24px 0;
+}
+
+.cf-confirm__sub {
+  font-size: 15.83px;
+  font-weight: 300;
+  color: var(--ink);
+  line-height: 28.49px;
+  max-width: 280px;
+  margin: 0;
+}
+
+.cf-confirm__back {
+  margin-top: 16px;
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-thickness: 0.5px;
+  text-underline-offset: 4px;
+}
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+footer {
+  padding: 32px var(--pad);
+  border-top: 1px solid rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 0.75rem;
+  font-weight: 300;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+
+.footer-links {
+  display: flex;
+  gap: 20px;
+}
+
+.footer-links a:hover {
+  color: var(--ink);
+}
+
+/* =====================================================
+   RESPONSIVE — TABLET (hide col 3 not needed,
+   keep 3 cols but reduce gap)
+   ===================================================== */
+@media (max-width: 900px) {
+  :root {
+    --gap: 14px;
+    --pad: 16px;
+    --header-h: 80px;
+  }
+}
+
+/* =====================================================
+   RESPONSIVE — MOBILE
+   ===================================================== */
+@media (max-width: 680px) {
+  :root {
+    --gap: 10px;
+    --pad: 12px;
+    --header-h: 64px;
   }
 
-  .hamburger div {
-    background: #111;
+  .nav-desktop {
+    display: none;
   }
 
-  .hero {
-    padding: 150px 20px 120px 20px;
+  .hamburger {
+    display: flex;
   }
 
-  .hero h1 {
-    font-size: 36px;
-    max-width: 90%;
+  /* On mobile: 2 columns only.
+     JS adds .is-mobile to portfolio and hides .grid-col:last-child,
+     redistributing those images. Simple CSS approach:
+     keep 3 cols but make them narrower. */
+  .portfolio {
+    gap: var(--gap);
   }
 
-  .hero p {
-    font-size: 18px;
-  }
-
-  .grid {
-    grid-template-columns: 1fr;
-    padding: 100px 20px;
-  }
-
-  .about, .contact {
-    padding: 100px 20px;
+  .section-text {
+    padding: 56px 12px;
   }
 
   footer {
-    padding: 60px 20px;
+    flex-direction: column;
+    align-items: flex-start;
   }
-
-  .overlay-text {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .lightbox-controls span {
-    font-size: 36px;
-    padding: 0 20px;
-  }
-
-  .lightbox .close {
-    font-size: 28px;
-    top: 20px;
-    right: 30px;
-  }
-}
-
-/* --------------------------
-   SMOOTH SCROLL
---------------------------- */
-html {
-  scroll-behavior: smooth;
 }
