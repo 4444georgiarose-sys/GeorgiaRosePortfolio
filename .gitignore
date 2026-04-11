@@ -1,3 +1,5 @@
 *.psd
 *.ai
 *.psb
+.DS_Store
+**/.DS_Store
