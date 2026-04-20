@@ -9,82 +9,55 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400&family=DM+Sans:ital,wght@0,200;0,300;0,400;1,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <style>
-    /* ── About page layout ── */
-    .about-layout {
-      display: flex;
-      flex-direction: row;
-      align-items: flex-start;
-      gap: 80px;
-      padding: 80px 120px 120px 120px;
+    /* ── About: statement ── */
+    .about-statement {
+      padding: 80px 120px 64px 120px;
+      max-width: 960px;
     }
 
-    /* ── Photo column ── */
-    .about-photo {
-      flex: 0 0 340px;
-      position: sticky;
-      top: calc(var(--header-h) + 40px);
-    }
-
-    .about-photo img {
-      width: 100%;
-      aspect-ratio: 3 / 4;
-      object-fit: cover;
-      display: block;
-    }
-
-    .about-photo__caption {
-      margin-top: 14px;
-      font-size: 0.72rem;
-      font-weight: 300;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    /* ── Text column ── */
-    .about-text {
-      flex: 1;
-      min-width: 0;
-      padding-top: 6px;
-    }
-
-    .about-text h1 {
-      font-size: 0.68rem;
-      font-weight: 400;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 32px;
-    }
-
-    .about-text__intro {
-      font-size: 1.25rem;
+    .about-statement p {
+      font-size: clamp(1.25rem, 2.4vw, 1.75rem);
       font-weight: 200;
-      line-height: 1.75;
+      line-height: 1.65;
       color: var(--ink);
-      margin-bottom: 36px;
       font-style: italic;
     }
 
-    .about-divider {
-      width: 40px;
-      height: 0.5px;
-      background: var(--ink);
-      opacity: 0.2;
-      margin-bottom: 36px;
+    /* ── About: full-width photo ── */
+    .about-hero {
+      width: 100%;
+      padding: 0 120px;
+      box-sizing: border-box;
     }
 
-    .about-text p {
+    .about-hero img {
+      width: 100%;
+      max-height: 80vh;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    .about-hero__caption {
+      margin-top: 12px;
+      font-size: 0.7rem;
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+
+    /* ── About: body text ── */
+    .about-body {
+      padding: 64px 120px 80px 120px;
+      max-width: 800px;
+    }
+
+    .about-body p {
       font-size: 15.83px;
       font-weight: 300;
       line-height: 28.49px;
       color: var(--ink);
       margin-bottom: 22px;
-      max-width: 560px;
-    }
-
-    .about-text p:last-of-type {
-      margin-bottom: 48px;
     }
 
     /* ── Details strip ── */
@@ -93,7 +66,7 @@
       flex-direction: column;
       gap: 16px;
       border-top: 1px solid rgba(0,0,0,0.1);
-      padding-top: 36px;
+      padding: 36px 120px 80px 120px;
     }
 
     .about-detail {
@@ -131,28 +104,29 @@
 
     /* ── Responsive ── */
     @media (max-width: 900px) {
-      .about-layout {
-        gap: 48px;
-        padding: 60px 40px 80px 40px;
-      }
-      .about-photo {
-        flex: 0 0 260px;
+      .about-statement,
+      .about-hero,
+      .about-body,
+      .about-details {
+        padding-left: 40px;
+        padding-right: 40px;
       }
     }
 
     @media (max-width: 680px) {
-      .about-layout {
-        flex-direction: column;
-        padding: 40px 24px 60px 24px;
-        gap: 40px;
+      .about-statement,
+      .about-hero,
+      .about-body,
+      .about-details {
+        padding-left: 24px;
+        padding-right: 24px;
       }
-      .about-photo {
-        flex: none;
-        width: 100%;
-        position: static;
+      .about-statement {
+        padding-top: 48px;
+        padding-bottom: 40px;
       }
-      .about-text__intro {
-        font-size: 1.1rem;
+      .about-statement p {
+        font-size: 1.15rem;
       }
     }
   </style>
@@ -184,55 +158,51 @@
 
   <!-- ── Main ── -->
   <main>
-    <div class="about-layout">
 
-      <!-- Photo -->
-      <div class="about-photo">
-        <img src="images/georgia.jpg" alt="Georgia Rose, photographer">
-        <p class="about-photo__caption">Georgia Rose</p>
+    <!-- Statement -->
+    <div class="about-statement">
+      <p>My goal is to capture the beauty of everyday life... what excites my clients, excites me.</p>
+    </div>
+
+    <!-- Full-width photo -->
+    <div class="about-hero">
+      <img src="images/georgia.jpg" alt="Georgia Rose, photographer">
+      <p class="about-hero__caption">Georgia Rose</p>
+    </div>
+
+    <!-- Body text -->
+    <div class="about-body">
+      <p>I love joining people for a day or a few hours and learning who they are and what lights them up. My clients have entrusted me with intimate moments of life — family, relationships, personal milestones, as well as shining a light their on businesses (big and small), and individual career achievements.</p>
+
+      <p>My work shows how much I love and care about the people I meet. I treat this job as a huge privilege; to be given access to people's inner worlds. I practise patience and care, and understand what it's like to be nervous in front of a camera. My ultimate goal is to make the experience truly enjoyable — not just to make it seem that way in the final results.</p>
+
+      <p>My approach is natural and relaxed. I want you to feel comfortable so you can focus on being yourself. I'll capture things as they happen, and once we're getting into it, I've got plenty of poses and fun ideas to try.</p>
+
+      <p>I offer a full service — creative direction and collaboration, styling, photography, editing and friendly on-the-day support. I am inspired by everyone I meet, and motivated to show my clients just how amazing they are. The photos I've taken throughout my career don't fit into one style or category, because everyone is different — I am here to adapt and discover the real you.</p>
+
+      <p>Based in Cambridgeshire, regularly visiting Essex and London where I was raised. I love to travel and embrace every challenge life throws at us. The sky could be falling and you won't catch me without a smile on my face, looking for the best in every moment.</p>
+    </div>
+
+    <!-- Details -->
+    <div class="about-details">
+      <div class="about-detail">
+        <span class="about-detail__label">Based</span>
+        <span class="about-detail__value">Cambridgeshire — available worldwide</span>
       </div>
-
-      <!-- Text -->
-      <div class="about-text">
-        <h1>About</h1>
-
-        <p class="about-text__intro">
-          My goal is to capture the beauty of every life — because what excites my clients, excites me.
-        </p>
-
-        <div class="about-divider"></div>
-
-        <p>I love joining people for a day or a few hours and learning who they are and what lights them up. My clients have entrusted me with intimate moments of life — family, relationships, personal milestones — as well as shining a light on businesses big and small, and individual career achievements.</p>
-
-        <p>My work shows how much I love and care about the people I meet. I treat my career as a privilege; to be given access to people's inner worlds. I practise patience and care, I understand what it's like to be nervous in front of a camera, and my ultimate goal is to make the experience truly enjoyable — not just to make it seem that way in the final results.</p>
-
-        <p>My approach is natural and relaxed. I want you to feel comfortable so you can focus on being yourself! I'll capture things as they happen, and once we're getting into it, I've got plenty of poses and fun ideas to try.</p>
-
-        <p>I offer a full service — creative direction and collaboration, styling, photography, editing and friendly on-the-day support. I am inspired by everyone I meet, and motivated to show my clients just how amazing YOU are. The photos I've taken throughout my career don't fit into one style or category, because everyone is different — I am here to adapt and discover the real you.</p>
-
-        <p>Based in Cambridgeshire, regularly visiting Essex and London where I was raised. I love to travel and embrace every challenge life throws us. The sky could be falling and you won't catch me without a smile on my face, looking for the best in every moment.</p>
-
-        <div class="about-details">
-          <div class="about-detail">
-            <span class="about-detail__label">Based</span>
-            <span class="about-detail__value">Cambridgeshire — available worldwide</span>
-          </div>
-          <div class="about-detail">
-            <span class="about-detail__label">Services</span>
-            <span class="about-detail__value">Portraits, Weddings, Family, Business, Events and Personal Milestones</span>
-          </div>
-          <div class="about-detail">
-            <span class="about-detail__label">Instagram</span>
-            <span class="about-detail__value"><a href="https://instagram.com/georgiaroselouise" target="_blank">@georgiaroselouise</a></span>
-          </div>
-          <div class="about-detail">
-            <span class="about-detail__label">Email</span>
-            <span class="about-detail__value"><a href="mailto:georgiaroth@hotmail.co.uk">georgiaroth@hotmail.co.uk</a></span>
-          </div>
-        </div>
-
+      <div class="about-detail">
+        <span class="about-detail__label">Services</span>
+        <span class="about-detail__value">Portraits, Weddings, Family, Business, Events and Personal Milestones</span>
+      </div>
+      <div class="about-detail">
+        <span class="about-detail__label">Instagram</span>
+        <span class="about-detail__value"><a href="https://instagram.com/georgiaroselouise" target="_blank">@georgiaroselouise</a></span>
+      </div>
+      <div class="about-detail">
+        <span class="about-detail__label">Email</span>
+        <span class="about-detail__value"><a href="mailto:georgiaroth@hotmail.co.uk">georgiaroth@hotmail.co.uk</a></span>
       </div>
     </div>
+
   </main>
 
   <!-- ── Footer ── -->
